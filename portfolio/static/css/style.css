@@ -4,14 +4,14 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: background-image 1s ease-in-out;
+  transition: background-image 1s ease-in-out, background-color 0.5s, color 0.5s;
   color: white;
   min-height: 100vh;
   margin: 0;
   padding: 0;
 }
 
-/* DARK OVERLAY FOR READABILITY */
+/* DARK OVERLAY FOR READABILITY ON BACKGROUND IMAGES */
 body::before {
   content: "";
   position: fixed;
@@ -30,6 +30,99 @@ header, footer {
   text-align: center;
 }
 
+footer {
+  margin-top: 4rem;
+}
+
+/* SECTION CONTAINER */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 2rem;
+}
+
+/* SECTION TITLE */
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* PROJECT CARDS */
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+/* RESPONSIVE ROW LAYOUT */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.col-md-4 {
+  flex: 1 1 calc(33.333% - 20px);
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.btn-outline-primary {
+  border: 2px solid #0d6efd;
+  color: #0d6efd;
+  background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.btn-success {
+  background-color: #198754;
+  color: white;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #157347;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
 /* SKILL BARS */
 .skill-bar {
   background-color: #e0e0e0;
@@ -45,14 +138,13 @@ header, footer {
   transition: width 2s ease-in-out;
 }
 
-/* DARK MODE */
+/* DARK MODE SUPPORT */
 .dark-mode {
   background-color: #1a1a1a;
   color: white;
 }
 
-.dark-mode header,
-.dark-mode footer {
+.dark-mode header, .dark-mode footer {
   background-color: #000;
 }
 
@@ -65,8 +157,9 @@ header, footer {
   50% { opacity: 0; }
 }
 
-/* OPTIONAL: IMAGE SLIDESHOW TRANSITION SUPPORT */
-.fade {
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .col-md-4 {
+    flex: 1 1 100%;
+  }
 }
