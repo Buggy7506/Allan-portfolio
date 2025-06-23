@@ -1,7 +1,4 @@
-from django.shortcuts import render
-
-# Create your views here.
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Project
 from .forms import ContactForm
 
@@ -20,3 +17,10 @@ def index(request):
         'projects': projects,
         'form': form
     })
+
+# ✅ New like view
+def like_project(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    project.likes += 1
+    project.save()
+    return redirect('index')
