@@ -1,39 +1,20 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+ {% load static %}
+
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% block title %}Allan Ndung'u Kanja{% endblock %}</title>
+  <title>{% block title %}Allan Ndung'u Kanja{% endblock %}</title>  <!-- ✅ Google AdSense Script -->  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          data-ad-client="ca-pub-3641984586289352"></script>  <!-- ✅ AOS Animations CSS -->  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />  <!-- ✅ Custom Styles -->  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head><body onload="animateSkills(); typeWriter();">
+  {% block content %}{% endblock %}  <!-- ✅ Google Ad Block --><ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-client="ca-pub-3641984586289352"
+data-ad-slot="8984320957"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
 
-  <!-- ✅ Google AdSense Script -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-          data-ad-client="ca-pub-3641984586289352"></script>
-
-  <!-- ✅ AOS Animations CSS -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-
-  <!-- ✅ Custom Styles -->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-
-<body onload="animateSkills(); typeWriter();">
-
-  {% block content %}{% endblock %}
-
-  <!-- ✅ Google Ad Block -->
-  <ins class="adsbygoogle"
-       style="display:block; text-align:center;"
-       data-ad-client="ca-pub-3641984586289352"
-       data-ad-slot="8984320957"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
   <script>
        (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-
-  <script src="{% static 'js/script.js' %}"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>AOS.init({ duration: 1000, once: true });</script>
-</body>
+  </script>  <!-- ✅ Custom JS -->  <script src="{% static 'js/script.js' %}"></script>  <!-- ✅ AOS Animations JS -->  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>  <script>AOS.init({ duration: 1000, once: true });</script></body>
 </html>
