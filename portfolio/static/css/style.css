@@ -33,8 +33,8 @@ body {
   }
   @keyframes blink {
     50% { opacity: 0; }
+   {   
 
-  {
   animation: gradientBG 20s ease infinite;
   background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #2c5364);
   background-size: 600% 600%;
@@ -58,6 +58,6 @@ body {
   100% {
     background-position: 0% 50%;
   }
-    
+
   }
   
