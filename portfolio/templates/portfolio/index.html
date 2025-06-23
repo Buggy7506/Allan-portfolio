@@ -1,15 +1,13 @@
-{% extends 'portfolio/base.html' %}
+ {% extends 'portfolio/base.html' %}
 {% load static %}
 {% block title %}My Portfolio{% endblock %}
 
 {% block content %}
 <header>
-  <h1>Dr.Allan Ndung'u Kanja</h1>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <h1>Dr. Allan Ndung'u Kanja</h1>
   <p><span id="typed-text"></span><span class="cursor">|</span></p>
   <button onclick="toggleTheme()">Toggle Theme</button>
 </header>
-<script src="{% static 'js/script.js' %}"></script>
 
 <section class="container">
   <h2 class="section-title">Projects</h2>
@@ -29,7 +27,6 @@
               <a href="/media/Allan_Ndungu_Kanja_CV.pdf" class="btn btn-primary mt-3" download>
                 Download My CV
               </a>
-              
             {% endif %}
           </div>
         </div>
@@ -40,9 +37,15 @@
 
 <!-- AdSense Placeholder -->
 <section class="container">
-  <div style="border:1px solid #ccc; padding:20px; text-align:center;">
-    <p><strong>Sponsored:</strong> This could be a Google Ad</p>
-  </div>
+  <ins class="adsbygoogle"
+       style="display:block; text-align:center;"
+       data-ad-client="ca-pub-3641984586289352"
+       data-ad-slot="9876543210"  <!-- Replace this with your actual AdSense slot ID -->
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
 </section>
 
 <!-- Hire Me -->
@@ -59,7 +62,7 @@
 <!-- M-PESA Support -->
 <section class="container">
   <h2 class="section-title">Support My Work</h2>
-  <br>Phone:<strong>0704715655</strong></p>
+  <p>Phone: <strong>0704715655</strong></p>
   <a href="sms:+254704715655?body=Hi%20Allan%2C%20I%20just%20sent%20a%20support%20token%20via%20M-PESA" class="btn btn-success">I Sent Support</a>
 </section>
 
@@ -74,10 +77,10 @@
       </a>
     </div>
     <div class="col-md-6">
-  <a href="https://www.hostpinnacle.co.ke/clients/aff.php?aff=3171" target="_blank">
-  <img src="https://www.hostpinnacle.co.ke/images/logo.png" alt="HostPinnacle Logo" class="img-fluid" style="max-height: 80px;">
-  <p>Fast Web Hosting in Kenya – Powered by HostPinnacle</p>
-</a>
+      <a href="https://www.hostpinnacle.co.ke/clients/aff.php?aff=3171" target="_blank">
+        <img src="https://www.hostpinnacle.co.ke/images/logo.png" alt="HostPinnacle Logo" class="img-fluid" style="max-height: 80px;">
+        <p>Fast Web Hosting in Kenya – Powered by HostPinnacle</p>
+      </a>
     </div>
   </div>
 </section>
