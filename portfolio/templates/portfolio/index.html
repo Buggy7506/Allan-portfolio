@@ -1,33 +1,41 @@
  {% extends 'portfolio/base.html' %}
 {% load static %}
-{% block title %}My Portfolio{% endblock %}
+{% block title %}My Projects - Allan Ndung'u Kanja{% endblock %}
 
 {% block content %}
 <header>
   <h1>Dr. Allan Ndung'u Kanja</h1>
   <p><span id="typed-text"></span><span class="cursor">|</span></p>
-  <button onclick="toggleTheme()">Toggle Theme</button>
+  <button onclick="toggleTheme()" class="btn btn-outline-primary">Toggle Theme</button>
 </header>
 
 <section class="container">
-  <h2 class="section-title">Projects</h2>
+  <h2 class="section-title">My Projects</h2>
   <div class="row">
     {% for project in projects %}
-      <div class="col-md-4">
+      <div class="col-md-4" data-aos="fade-up">
         <div class="card">
           {% if project.image %}
-            <img src="{{ project.image.url }}" alt="{{ project.title }}">
+            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="card-img-top">
           {% endif %}
           <div class="card-body">
             <h5>{{ project.title }}</h5>
             <p>{{ project.description }}</p>
             <p><strong>{{ project.technology }}</strong></p>
+
             {% if project.github_link %}
-              <a href="{{ project.github_link }}" target="_blank">View Code</a>
-              <a href="/media/Allan_Ndungu_Kanja_CV.pdf" class="btn btn-primary mt-3" download>
-                Download My CV
+              <a href="{{ project.github_link }}" target="_blank" class="btn btn-outline-primary">
+                🔗 View on GitHub
               </a>
             {% endif %}
+            {% if project.demo_link %}
+              <a href="{{ project.demo_link }}" target="_blank" class="btn btn-success">
+                🌐 Live Demo
+              </a>
+            {% endif %}
+            <a href="/media/Allan_Ndungu_Kanja_CV.pdf" download class="btn btn-secondary">
+              📄 Download My CV
+            </a>
           </div>
         </div>
       </div>
@@ -35,64 +43,39 @@
   </div>
 </section>
 
-<!-- AdSense Placeholder -->
-<section class="container">
-  <ins class="adsbygoogle"
-       style="display:block; text-align:center;"
-       data-ad-client="ca-pub-3641984586289352"
-       data-ad-slot="8984320957"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-</section>
-
-<!-- Hire Me -->
 <section class="container">
   <h2 class="section-title">Hire Me</h2>
   <ul>
     <li>Django and Access systems</li>
-    <li>CVs, Reports, Word Processing</li>
-    <li>Excel data analysis</li>
+    <li>Word Processing, Reports, Presentations</li>
+    <li>Excel data analysis & dashboards</li>
+    <li>Python, Java, HTML, JS, SQL</li>
   </ul>
   <p>📞 0704715655 | 📧 linux7506@gmail.com</p>
 </section>
 
-<!-- M-PESA Support -->
 <section class="container">
   <h2 class="section-title">Support My Work</h2>
-  <p>Phone: <strong>0704715655</strong></p>
-  <a href="sms:+254704715655?body=Hi%20Allan%2C%20I%20just%20sent%20a%20support%20token%20via%20M-PESA" class="btn btn-success">I Sent Support</a>
+  <p><strong>M-PESA:</strong> 0704715655</p>
+  <a href="sms:+254704715655?body=Hi%20Allan%2C%20I%20just%20sent%20a%20support%20token%20via%20M-PESA" class="btn btn-success">💚 I Sent Support</a>
 </section>
 
-<!-- Affiliate Section -->
 <section class="container">
-  <h2 class="section-title">Deals I Recommend</h2>
+  <h2 class="section-title">Recommended Deals</h2>
   <div class="row">
     <div class="col-md-6">
-      <a href="https://jumia.link/your-code">
-        <img src="https://static.jumia.co.ke/cms/img/brand/jumia.png" alt="Jumia" />
+      <a href="https://jumia.link/your-code" target="_blank">
+        <img src="https://static.jumia.co.ke/cms/img/brand/jumia.png" alt="Jumia" class="img-fluid">
         <p>Laptops on Jumia</p>
       </a>
     </div>
     <div class="col-md-6">
       <a href="https://www.hostpinnacle.co.ke/clients/aff.php?aff=3171" target="_blank">
-        <img src="https://www.hostpinnacle.co.ke/images/logo.png" alt="HostPinnacle Logo" class="img-fluid" style="max-height: 80px;">
-        <p>Fast Web Hosting in Kenya – Powered by HostPinnacle</p>
+        <img src="https://www.hostpinnacle.co.ke/images/logo.png" alt="HostPinnacle" class="img-fluid" style="max-height: 80px;">
+        <p>Fast Hosting by HostPinnacle</p>
       </a>
     </div>
   </div>
-</section>
-
-<!-- Contact Form -->
-<section class="container">
-  <h2 class="section-title">Contact Me</h2>
-  <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Send</button>
-  </form>
 </section>
 
 <footer>
