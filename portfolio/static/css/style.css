@@ -1,0 +1,37 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    transition: background-color 0.5s, color 0.5s;
+  }
+  header, footer {
+    background: #1a1a1a;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+  }
+  .skill-bar {
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  .skill-fill {
+    height: 20px;
+    background-color: #0d6efd;
+    width: 0;
+    transition: width 2s ease-in-out;
+  }
+  .dark-mode {
+    background-color: #1a1a1a;
+    color: white;
+  }
+  .dark-mode header, .dark-mode footer {
+    background-color: #000;
+  }
+  .cursor {
+    animation: blink 1s infinite;
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+  
