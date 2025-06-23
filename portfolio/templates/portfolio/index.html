@@ -1,15 +1,12 @@
- {% extends 'portfolio/base.html' %}
-{% load static %}
-{% block title %}My Projects - Allan Ndung'u Kanja{% endblock %}
+ {% extends 'portfolio/base.html' %} {% load static %} {% block title %}My Projects - Allan Ndung'u Kanja{% endblock %}
 
 {% block content %}
+
 <header>
   <h1>Dr. Allan Ndung'u Kanja</h1>
   <p><span id="typed-text"></span><span class="cursor">|</span></p>
   <button onclick="toggleTheme()" class="btn btn-outline-primary">Toggle Theme</button>
-</header>
-
-<section class="container">
+</header><section class="container">
   <h2 class="section-title">My Projects</h2>
   <div class="row">
     {% for project in projects %}
@@ -21,29 +18,26 @@
           <div class="card-body">
             <h5>{{ project.title }}</h5>
             <p>{{ project.description }}</p>
-            <p><strong>{{ project.technology }}</strong></p>
-
-            {% if project.github_link %}
-              <a href="{{ project.github_link }}" target="_blank" class="btn btn-outline-primary">
-                🔗 View on GitHub
-              </a>
-            {% endif %}
-            {% if project.demo_link %}
-              <a href="{{ project.demo_link }}" target="_blank" class="btn btn-success">
-                🌐 Live Demo
-              </a>
-            {% endif %}
-            <a href="/media/Allan_Ndungu_Kanja_CV.pdf" download class="btn btn-secondary">
-              📄 Download My CV
-            </a>
-          </div>
-        </div>
+            <p><strong>{{ project.technology }}</strong></p>{% if project.github_link %}
+          <a href="{{ project.github_link }}" target="_blank" class="btn btn-outline-primary">
+            🔗 View on GitHub
+          </a>
+        {% endif %}
+        {% if project.demo_link %}
+          <a href="{{ project.demo_link }}" target="_blank" class="btn btn-success">
+            🌐 Live Demo
+          </a>
+        {% endif %}
+        <a href="/media/Allan_Ndungu_Kanja_CV.pdf" download class="btn btn-secondary">
+          📄 Download My CV
+        </a>
       </div>
-    {% endfor %}
+    </div>
   </div>
-</section>
+{% endfor %}
 
-<section class="container">
+  </div>
+</section><section class="container">
   <h2 class="section-title">Hire Me</h2>
   <ul>
     <li>Django and Access systems</li>
@@ -52,15 +46,11 @@
     <li>Python, Java, HTML, JS, SQL</li>
   </ul>
   <p>📞 0704715655 | 📧 linux7506@gmail.com</p>
-</section>
-
-<section class="container">
+</section><section class="container">
   <h2 class="section-title">Support My Work</h2>
   <p><strong>M-PESA:</strong> 0704715655</p>
   <a href="sms:+254704715655?body=Hi%20Allan%2C%20I%20just%20sent%20a%20support%20token%20via%20M-PESA" class="btn btn-success">💚 I Sent Support</a>
-</section>
-
-<section class="container">
+</section><section class="container">
   <h2 class="section-title">Recommended Deals</h2>
   <div class="row">
     <div class="col-md-6">
@@ -76,9 +66,20 @@
       </a>
     </div>
   </div>
-</section>
-
-<footer>
+</section><section class="container">
+  <h2 class="section-title">Connect with Me</h2>
+  <div style="text-align: center;">
+    <a href="https://wa.me/254704715655" target="_blank" style="margin: 0 10px;">
+      <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WhatsApp" width="40">
+    </a>
+    <a href="https://instagram.com/d.f.w._.st3pp3r" target="_blank" style="margin: 0 10px;">
+      <img src="https://img.icons8.com/color/48/000000/instagram-new--v1.png" alt="Instagram" width="40">
+    </a>
+    <a href="https://facebook.com" target="_blank" style="margin: 0 10px;">
+      <img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook" width="40">
+    </a>
+  </div>
+</section><footer>
   <p>&copy; 2025 Allan Ndung'u Kanja</p>
 </footer>
 {% endblock %}
