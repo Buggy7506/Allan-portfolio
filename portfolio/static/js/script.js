@@ -17,8 +17,10 @@ const text = "I specialize in: Python, Java, Excel, Word, JavaScript, HTML, Acce
 let i = 0;
 
 function typeWriter() {
+  const el = document.getElementById("typed-text");
+  if (!el) return;
   if (i < text.length) {
-    document.getElementById("typed-text").innerHTML += text.charAt(i);
+    el.innerHTML += text.charAt(i);
     i++;
     setTimeout(typeWriter, 60);
   }
@@ -37,9 +39,10 @@ function changeBackground() {
   index = (index + 1) % images.length;
 }
 
-window.onload = function() {
+// ✅ Wait until DOM is fully ready
+document.addEventListener("DOMContentLoaded", function () {
   animateSkills();
   typeWriter();
   changeBackground();
   setInterval(changeBackground, 10000);
-};
+});
