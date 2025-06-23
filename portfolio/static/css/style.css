@@ -1,63 +1,62 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
-    transition: background-color 0.5s, color 0.5s;
-  }
-  header, footer {
-    background: #1a1a1a;
-    color: white;
-    padding: 2rem;
-    text-align: center;
-  }
-  .skill-bar {
-    background-color: #e0e0e0;
-    border-radius: 20px;
-    overflow: hidden;
-    margin-bottom: 1rem;
-  }
-  .skill-fill {
-    height: 20px;
-    background-color: #0d6efd;
-    width: 0;
-    transition: width 2s ease-in-out;
-  }
-  .dark-mode {
-    background-color: #1a1a1a;
-    color: white;
-  }
-  .dark-mode header, .dark-mode footer {
-    background-color: #000;
-  }
-  .cursor {
-    animation: blink 1s infinite;
-  }
-  @keyframes blink {
-    50% { opacity: 0; }
-   {   
-
+ body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   animation: gradientBG 20s ease infinite;
   background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #2c5364);
   background-size: 600% 600%;
-  color: #fff;
-  transition: background 1s;
+  color: white;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  transition: background 0.5s, color 0.5s;
 }
 
-@keyframes gradientBG {
-  0% {
-    background-position: 0% 50%;
-  }
-  25% {
-    background-position: 50% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  75% {
-    background-position: 50% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+/* HEADER / FOOTER */
+header, footer {
+  background: #1a1a1a;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
 
-  }
-  
+/* SKILL BARS */
+.skill-bar {
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.skill-fill {
+  height: 20px;
+  background-color: #0d6efd;
+  width: 0;
+  transition: width 2s ease-in-out;
+}
+
+/* DARK MODE */
+.dark-mode {
+  background-color: #1a1a1a;
+  color: white;
+}
+
+.dark-mode header, .dark-mode footer {
+  background-color: #000;
+}
+
+/* CURSOR */
+.cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* BACKGROUND ANIMATION */
+@keyframes gradientBG {
+  0%   { background-position: 0% 50%; }
+  25%  { background-position: 50% 50%; }
+  50%  { background-position: 100% 50%; }
+  75%  { background-position: 50% 50%; }
+  100% { background-position: 0% 50%; }
+}
