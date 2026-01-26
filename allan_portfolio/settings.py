@@ -29,8 +29,8 @@ SECRET_KEY = 'django-insecure-9wye6)2#iw)p941frfi&^+sjxc7kny8ys-)9ny4^r_p8jd)f#)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG")
 ALLOWED_HOSTS = [
-    'https://allan-portfolio-qgpa.onrender.com',
-    'https://*.onrender.com',
+    'allan-portfolio-qgpa.onrender.com',
+    '.onrender.com',
 ]
 
 
