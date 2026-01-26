@@ -29,8 +29,11 @@ SECRET_KEY = 'django-insecure-9wye6)2#iw)p941frfi&^+sjxc7kny8ys-)9ny4^r_p8jd)f#)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG")
 ALLOWED_HOSTS = [
-    'allan-portfolio-qgpa.onrender.com',
+    'www.fazul.dpdns.org',
+    'fazul.dpdns.org',
+    'allan-portfolio-b6pi.onrender.com',
     '.onrender.com',
+    '.dpdns.org',
 ]
 
 
@@ -161,3 +164,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'portfolio/static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://www.fazul.dpdns.org",
+    "https://fazul.dpdns.org",
+    "https://www.stepper.dpdns.org",
+    "https://stepper.dpdns.org",
+    "https://allan-portfolio-b6pi.onrender.com",
+]
