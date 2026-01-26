@@ -27,8 +27,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9wye6)2#iw)p941frfi&^+sjxc7kny8ys-)9ny4^r_p8jd)f#)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'RENDER' not in os.environ
-ALLOWED_HOSTS = ['.vercel.app']
+DEBUG = os.environ.get("DEBUG")
+ALLOWED_HOSTS = [
+    'https://allan-portfolio-qgpa.onrender.com',
+    'https://*.onrender.com',
+]
 
 
 DATABASES = {
