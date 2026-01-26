@@ -1,6 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Project
 from .forms import ContactForm
+from django.http import HttpResponse
+
+# Ping Page
+def ping(request):
+    return HttpResponse("pong")
 
 def index(request):
     projects = Project.objects.all()
