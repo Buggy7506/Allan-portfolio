@@ -317,15 +317,20 @@ footer, .site-footer {
     {% for project in projects %}
       <div class="col-md-4" data-aos="fade-up">
         <div class="card h-100 shadow-lg">
-          {% if project.image %}
-            <img src="{{ project.image.url }}?f_auto,q_auto,w_600,h_400,c_fill" 
-                 alt="{{ project.title }}" class="card-img-top">
-          {% endif %}
           <div class="card-body d-flex flex-column">
-            <h5 class="fw-bold">{{ project.title }}</h5>
+            <h5 class="fw-bold">
+              {% if project.image %}
+                <img src="{{ project.image.url }}?f_auto,q_auto,w_32,h_32,c_fill"
+                     alt="{{ project.title }}"
+                     style="width:32px; height:32px; object-fit:cover; vertical-align:middle; margin-right:8px; border-radius:4px;">
+              {% endif %}
+              {{ project.title }}
+            </h5>
+
             <p>{{ project.description }}</p>
             <p><strong>{{ project.technology }}</strong></p>
             <small class="text-muted mb-2">👁 {{ project.views }} views</small>
+
             <div class="mt-auto">
               {% if project.github_link %}
                 <a href="{{ project.github_link }}" target="_blank" class="btn btn-outline-primary btn-sm">🔗 GitHub</a>
