@@ -2,243 +2,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ===============================
-       CORE META
-  ================================ -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>{% block title %}𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑{% endblock %}</title>
 
-  <!-- ===============================
-       FAVICON
-  ================================ -->
-  <link rel="icon" href="static/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
 
-  <!-- ===============================
-       SEO (GLOBAL)
-  ================================ -->
+  <!-- SEO -->
   <meta name="description" content="Allan Fazul – Django Developer, Python Engineer, Portfolio & Projects">
   <meta name="keywords" content="Django, Python, Web Developer, Kenya, Portfolio">
 
-  <!-- ===============================
-       OPEN GRAPH
-  ================================ -->
+  <!-- OpenGraph -->
   <meta property="og:title" content="Allan Fazul | Portfolio">
   <meta property="og:description" content="Projects, demos, and professional work by Allan Fazul">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://stepper.dpdns.org">
   {% block og_image %}{% endblock %}
 
-  <!-- ===============================
-       GOOGLE ADSENSE
-  ================================ -->
-  <script async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-    data-ad-client="ca-pub-3641984586289352">
-  </script>
+  <!-- Google Adsense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" data-ad-client="ca-pub-3641984586289352"></script>
 
-  <!-- ===============================
-       AOS ANIMATIONS
-  ================================ -->
+  <!-- AOS CSS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-  <!-- ===============================
-       GLOBAL STYLES
-  ================================ -->
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <style>
     :root {
       --primary: #0d6efd;
       --success: #198754;
       --dark-bg: #0f172a;
-      --dark-card: rgba(255,255,255,0.08);
       --light-bg: #f8fafc;
-      --light-card: #ffffff;
+      --dark-card: rgba(255,255,255,0.08);
+      --light-card: rgba(255,255,255,0.95);
     }
 
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
       font-family: 'Segoe UI', system-ui, sans-serif;
-      transition: background .3s, color .3s;
+      transition: background 0.5s, color 0.5s;
     }
 
-    body.dark {
-      background: var(--dark-bg);
-      color: #e5e7eb;
-    }
+    body.dark { background: var(--dark-bg); color: #e5e7eb; }
+    body.light { background: var(--light-bg); color: #0f172a; }
 
-    body.light {
-      background: var(--light-bg);
-      color: #0f172a;
-    }
+    #page-wrapper { min-height: 100vh; display: flex; flex-direction: column; }
 
     header {
-      background: linear-gradient(135deg, #020617, #1e293b);
-      color: #fff;
-      padding: 4rem 1rem;
       text-align: center;
+      padding: 4rem 1rem;
+      background: linear-gradient(135deg, #020617, #1e293b);
+      color: white;
     }
 
-    .section-title {
-      font-weight: 800;
-      margin-bottom: 2rem;
-      color: var(--primary);
-    }
+    .section-title { text-align: center; margin-bottom: 2rem; font-weight: 700; color: var(--primary); }
 
-    /* ===============================
-       CARDS (GLASSMORPHISM)
-    ================================ */
     .card {
       background: var(--dark-card);
       backdrop-filter: blur(14px);
       border-radius: 16px;
       border: none;
-      box-shadow: 0 20px 45px rgba(0,0,0,.35);
-      transition: transform .3s ease, box-shadow .3s ease;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+      transition: transform .3s, box-shadow .3s;
     }
 
-    body.light .card {
-      background: var(--light-card);
+    body.light .card { background: var(--light-card); }
+
+    .card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,.45); }
+
+    .card-img-top { height: 220px; object-fit: cover; border-radius: 16px 16px 0 0; width: 100%; }
+
+    .btn { margin: .25rem .15rem; cursor: pointer; }
+    .btn-success { background: linear-gradient(to right,#198754,#20c997); color:white; border:none; }
+    .btn-success:hover { background:#157347; }
+    .btn-secondary { background:#6c757d; color:white; border:none; }
+    .btn-secondary:hover { background:#5a6268; }
+
+    footer { margin-top:auto; text-align:center; padding:2rem 1rem; background:#020617; color:#cbd5f5; }
+
+    .cursor { animation: blink 1s infinite; }
+    @keyframes blink { 0%,100% {opacity:1} 50% {opacity:0} }
+
+    /* SOCIAL ICONS DISTRIBUTION */
+    #socials { display: flex; justify-content: space-between; max-width:500px; margin:2rem auto; padding:0 1rem; }
+    #socials a img { width:48px;height:48px; transition: transform 0.3s, filter 0.3s; }
+    #socials a:hover img { transform: scale(1.2); filter: drop-shadow(0 0 6px var(--primary)); }
+
+    @media(max-width:576px){ #socials{flex-direction:column; gap:1rem;} }
+
+    /* SECTIONS */
+    section.container { margin-bottom:4rem; }
+
+    /* MENU TOGGLE */
+    .menu-toggle {
+      position: fixed; top:20px; right:20px; z-index:2000;
+      background: linear-gradient(135deg,var(--primary),#6610f2);
+      color:#fff; border:none; border-radius:50%;
+      width:55px; height:55px; font-size:1.6rem; cursor:pointer;
+      box-shadow:0 10px 25px rgba(0,0,0,0.3);
     }
 
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 30px 60px rgba(0,0,0,.45);
-    }
-
-    .card-img-top {
-      height: 220px;
-      object-fit: cover;
-      border-radius: 16px 16px 0 0;
-    }
-
-    /* ===============================
-       BUTTONS
-    ================================ */
-    .btn {
-      margin: .25rem .15rem;
-    }
-
-    .btn-success {
-      background: linear-gradient(to right, #198754, #20c997);
-      border: none;
-    }
-
-    footer {
-      background: #020617;
-      color: #9ca3af;
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-
-    .cursor {
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0%,100% {opacity:1}
-      50% {opacity:0}
-    }
+    /* SECTION VISIBILITY */
+    .section { display:none; animation: fadeIn 0.4s ease-in-out; }
+    .section.active { display:block; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
   </style>
- 
 </head>
 
-<body onload="animateSkills(); typeWriter();">
+<body id="page-wrapper" class="dark">
 
   {% block content %}{% endblock %}
 
-  <!-- ===============================
-       GOOGLE AD BLOCK
-  ================================ -->
-  <ins class="adsbygoogle"
-       style="display:block;text-align:center"
+  <!-- Adsense -->
+  <ins class="adsbygoogle" style="display:block;text-align:center"
        data-ad-client="ca-pub-3641984586289352"
        data-ad-slot="3673984646"
        data-ad-format="auto"
-       data-full-width-responsive="true">
-  </ins>
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
 
-  <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-  <!-- ===============================
-       AOS INIT
-  ================================ -->
+  <!-- AOS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init({ duration:1000, once:true });</script>
+
+  <!-- CUSTOM JS -->
   <script>
-    AOS.init({ duration: 1000, once: true });
+  (function(){
+    /* ========== THEME TOGGLE (Persistent) ========== */
+    function applySavedTheme(){
+      const saved = localStorage.getItem('theme') || 'dark';
+      document.body.className = saved;
+    }
+
+    window.toggleTheme = function(){
+      const body = document.body;
+      const theme = body.classList.contains('dark') ? 'light' : 'dark';
+      body.className = theme;
+      localStorage.setItem('theme', theme);
+    };
+    applySavedTheme();
+
+    /* ========== AJAX LIKE BUTTONS ========== */
+    document.addEventListener('DOMContentLoaded', function(){
+      document.querySelectorAll('.like-btn').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          const id = this.dataset.id;
+          fetch(`/project/${id}/like/`, {
+            method:'POST',
+            headers:{ 'X-CSRFToken':'{{ csrf_token }}' }
+          })
+          .then(r=>r.json())
+          .then(data=>{
+            const counter = document.getElementById(`likes-${id}`);
+            if(counter) counter.innerText = data.likes;
+          });
+        });
+      });
+    });
+
+    /* ========== CLOUDINARY BACKGROUND IMAGES ========== */
+    const images = [
+      "https://res.cloudinary.com/demo/image/upload/w_1920,h_1080,c_fill,q_auto,f_auto/bg1.jpg",
+      "https://res.cloudinary.com/demo/image/upload/w_1920,h_1080,c_fill,q_auto,f_auto/bg2.jpg",
+      "https://res.cloudinary.com/demo/image/upload/w_1920,h_1080,c_fill,q_auto,f_auto/bg3.jpg"
+    ];
+    let index = 0;
+    function changeBackground(){
+      document.body.style.backgroundImage = `url('${images[index]}')`;
+      index=(index+1)%images.length;
+    }
+    changeBackground();
+    setInterval(changeBackground,10000);
+
+    /* ========== SKILL BAR ANIMATION ========== */
+    const bars = document.querySelectorAll('.skill-fill');
+    bars.forEach(bar=>{
+      const w = bar.getAttribute('data-width')||'100%';
+      bar.style.width='0';
+      setTimeout(()=>{bar.style.width=w;},100);
+    });
+
+    /* ========== TYPING EFFECT ========== */
+    const text="I specialize in: Python, Java, Excel, Word, JavaScript, HTML, Access...";
+    let i=0;
+    function typeWriter(){
+      const el=document.getElementById("typed-text");
+      if(!el) return;
+      if(i<text.length){el.innerHTML+=text.charAt(i); i++; setTimeout(typeWriter,60);}
+    }
+    typeWriter();
+  })();
   </script>
-  
-  <!-- ===============================
-       CUSTOM JS (AJAX + THEME)
-  ================================ -->
-<script>
-     // ---------------------------
-// SKILL BAR ANIMATION
-// ---------------------------
-function animateSkills() {
-  const bars = document.querySelectorAll('.skill-fill');
-  bars.forEach(bar => {
-    const targetWidth = bar.getAttribute('data-width') || '100%';
-    bar.style.width = '0';
-    setTimeout(() => {
-      bar.style.width = targetWidth;
-    }, 100);
-  });
-}
-
-// ---------------------------
-// DARK MODE TOGGLE
-// ---------------------------
-function toggleTheme() {
-  document.body.classList.toggle('dark-mode');
-}
-
-// ---------------------------
-// TYPING TEXT EFFECT
-// ---------------------------
-const text = "I specialize in: Python, Java, Excel, Word, JavaScript, HTML, Access...";
-let i = 0;
-
-function typeWriter() {
-  const typedText = document.getElementById("typed-text");
-  if (!typedText) return;
-
-  if (i < text.length) {
-    typedText.innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeWriter, 60);
-  }
-}
-
-// ---------------------------
-// DYNAMIC BACKGROUND IMAGES
-// ---------------------------
-const images = [
-  "/static/img/bg1.jpg",
-  "/static/img/bg2.jpg",
-  "/static/img/bg3.jpg"
-];
-let index = 0;
-
-function changeBackground() {
-  document.body.style.backgroundImage = `url('${images[index]}')`;
-  index = (index + 1) % images.length;
-}
-
-// ---------------------------
-// RUN AFTER HTML LOADS
-// ---------------------------
-document.addEventListener("DOMContentLoaded", function () {
-  animateSkills();
-  typeWriter();
-  changeBackground();
-  setInterval(changeBackground, 10000); // Every 10 seconds
-
-  // Debug: Confirm JS loaded
-  console.log("✅ JavaScript Loaded & Running!");
-});
-</script>
-
 </body>
 </html>
