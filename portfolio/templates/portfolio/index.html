@@ -13,7 +13,42 @@
 
 <style>
 /* ===============================
-   GLOBAL STYLES
+   GLOBAL BODY + TYPOGRAPHY
+================================ */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 1s ease-in-out, background-color 0.5s, color 0.5s;
+  color: white;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+body.dark {
+  background: #0f172a;
+  color: #e5e7eb;
+}
+
+body.light {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+/* ===============================
+   HEADER + HERO
 ================================ */
 header {
   text-align: center;
@@ -36,11 +71,34 @@ header h1 {
   25%, 75% { opacity: 0; }
 }
 
+/* ===============================
+   SECTIONS
+================================ */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 2rem;
+}
+
 .section-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
   text-align: center;
-  margin: 3rem 0 2rem;
-  font-weight: 700;
   color: #0d6efd;
+}
+
+.section {
+  display: none;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ===============================
@@ -53,6 +111,8 @@ header h1 {
   border: none;
   box-shadow: 0 15px 35px rgba(0,0,0,0.2);
   transition: transform .3s ease, box-shadow .3s ease;
+  padding: 1rem;
+  margin-bottom: 2rem;
 }
 
 .card:hover {
@@ -79,38 +139,68 @@ header h1 {
    BUTTONS
 ================================ */
 .btn {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
   margin: 0.25rem 0.15rem;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.btn-outline-primary {
+  border: 2px solid #0d6efd;
+  color: #0d6efd;
+  background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: white;
 }
 
 .btn-success {
   background: linear-gradient(to right, #198754, #20c997);
+  color: white;
   border: none;
 }
 
+.btn-success:hover {
+  background-color: #157347;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
 /* ===============================
-   SECTIONS
+   FLEX GRID
 ================================ */
-section.container {
-  margin-bottom: 4rem;
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-footer {
-  text-align: center;
-  padding: 2rem;
-  background: #0f172a;
-  color: #ccc;
-}
-body.dark {
-  background: #0f172a;
-  color: #e5e7eb;
+.col-md-4 {
+  flex: 1 1 calc(33.333% - 20px);
 }
 
-body.light {
-  background: #f8fafc;
-  color: #0f172a;
+@media (max-width: 768px) {
+  .col-md-4 {
+    flex: 1 1 100%;
+  }
 }
+
 /* ===============================
-   PAGE LAYOUT (Sticky Footer)
+   STICKY FOOTER LAYOUT
 ================================ */
 html, body {
   height: 100%;
@@ -123,10 +213,10 @@ html, body {
   flex-direction: column;
 }
 
-.site-footer {
+footer, .site-footer {
   margin-top: auto;
   text-align: center;
-  padding: 1.5rem;
+  padding: 1.5rem 2rem;
   background: #0f172a;
   color: #cbd5f5;
 }
@@ -151,20 +241,20 @@ html, body {
 }
 
 /* ===============================
-   SECTION VISIBILITY
+   SKILL BARS (OPTIONAL)
 ================================ */
-.section {
-  display: none;
-  animation: fadeIn 0.4s ease-in-out;
+.skill-bar {
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 1rem;
 }
 
-.section.active {
-  display: block;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.skill-fill {
+  height: 20px;
+  background-color: #0d6efd;
+  width: 0;
+  transition: width 2s ease-in-out;
 }
 </style>
 
