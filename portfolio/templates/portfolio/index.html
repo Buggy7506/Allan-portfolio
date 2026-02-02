@@ -3,6 +3,12 @@
 
 {% block title %}My Projects – 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑{% endblock %}
 
+{% block og_image %}
+  {% if projects and projects.0.image %}
+    <meta property="og:image" content="{{ projects.0.image.url }}">
+  {% endif %}
+{% endblock %}
+
 {% block content %}
 
 <style>
