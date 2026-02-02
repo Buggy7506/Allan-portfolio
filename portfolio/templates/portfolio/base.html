@@ -21,7 +21,8 @@
   {% block og_image %}{% endblock %}
 
   <!-- Google Adsense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" data-ad-client="ca-pub-3641984586289352"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" 
+          data-ad-client="ca-pub-3641984586289352"></script>
 
   <!-- AOS CSS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -48,7 +49,11 @@
     body.dark { background: var(--dark-bg); color: #e5e7eb; }
     body.light { background: var(--light-bg); color: #0f172a; }
 
-    #page-wrapper { min-height: 100vh; display: flex; flex-direction: column; }
+    #page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
     header {
       text-align: center;
@@ -57,7 +62,12 @@
       color: white;
     }
 
-    .section-title { text-align: center; margin-bottom: 2rem; font-weight: 700; color: var(--primary); }
+    .section-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
 
     .card {
       background: var(--dark-card);
@@ -69,7 +79,6 @@
     }
 
     body.light .card { background: var(--light-card); }
-
     .card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,.45); }
 
     .card-img-top { height: 220px; object-fit: cover; border-radius: 16px 16px 0 0; width: 100%; }
@@ -80,7 +89,14 @@
     .btn-secondary { background:#6c757d; color:white; border:none; }
     .btn-secondary:hover { background:#5a6268; }
 
-    footer { margin-top:auto; text-align:center; padding:2rem 1rem; background:#020617; color:#cbd5f5; }
+    /* Footer */
+    footer, .site-footer {
+      margin-top:auto;
+      text-align:center;
+      padding:2rem 1rem;
+      background:#020617;
+      color:#cbd5f5;
+    }
 
     .cursor { animation: blink 1s infinite; }
     @keyframes blink { 0%,100% {opacity:1} 50% {opacity:0} }
@@ -89,10 +105,9 @@
     #socials { display: flex; justify-content: space-between; max-width:500px; margin:2rem auto; padding:0 1rem; }
     #socials a img { width:48px;height:48px; transition: transform 0.3s, filter 0.3s; }
     #socials a:hover img { transform: scale(1.2); filter: drop-shadow(0 0 6px var(--primary)); }
-
     @media(max-width:576px){ #socials{flex-direction:column; gap:1rem;} }
 
-    /* SECTIONS */
+    /* Sections */
     section.container { margin-bottom:4rem; }
 
     /* MENU TOGGLE */
@@ -115,6 +130,11 @@
 
   {% block content %}{% endblock %}
 
+  <!-- Footer Added -->
+  <footer class="site-footer">
+    <p>&copy; 2025 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑</p>
+  </footer>
+
   <!-- Adsense -->
   <ins class="adsbygoogle" style="display:block;text-align:center"
        data-ad-client="ca-pub-3641984586289352"
@@ -130,12 +150,11 @@
   <!-- CUSTOM JS -->
   <script>
   (function(){
-    /* ========== THEME TOGGLE (Persistent) ========== */
+    /* THEME TOGGLE */
     function applySavedTheme(){
       const saved = localStorage.getItem('theme') || 'dark';
       document.body.className = saved;
     }
-
     window.toggleTheme = function(){
       const body = document.body;
       const theme = body.classList.contains('dark') ? 'light' : 'dark';
@@ -144,7 +163,7 @@
     };
     applySavedTheme();
 
-    /* ========== AJAX LIKE BUTTONS ========== */
+    /* AJAX LIKE BUTTONS */
     document.addEventListener('DOMContentLoaded', function(){
       document.querySelectorAll('.like-btn').forEach(function(btn){
         btn.addEventListener('click', function(){
@@ -162,24 +181,26 @@
       });
     });
 
-    /* ========== CLOUDINARY BACKGROUND IMAGES ========== */
+    /* CLOUDINARY BACKGROUND IMAGES FIXED */
     const images = [
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293053/upload_cv_ycfvbc.png",
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293058/alert_oibikt.png",
-      "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293036/resume_wdunf1.png"
-      "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293044/suggest_ojjngh.png"
-      "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293032/Black_Wallpaper_010_h4iy3f.png"
+      "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293036/resume_wdunf1.png",
+      "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293044/suggest_ojjngh.png",
+      "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293032/Black_Wallpaper_010_h4iy3f.png",
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1754404722/samples/shoe.jpg"
     ];
     let index = 0;
     function changeBackground(){
       document.body.style.backgroundImage = `url('${images[index]}')`;
+      document.body.style.backgroundSize = 'cover';
+      document.body.style.backgroundPosition = 'center';
       index=(index+1)%images.length;
     }
     changeBackground();
     setInterval(changeBackground,10000);
 
-    /* ========== SKILL BAR ANIMATION ========== */
+    /* SKILL BAR ANIMATION */
     const bars = document.querySelectorAll('.skill-fill');
     bars.forEach(bar=>{
       const w = bar.getAttribute('data-width')||'100%';
@@ -187,7 +208,7 @@
       setTimeout(()=>{bar.style.width=w;},100);
     });
 
-    /* ========== TYPING EFFECT ========== */
+    /* TYPING EFFECT */
     const text="I specialize in: Python, Java, Excel, Word, JavaScript, HTML, Access...";
     let i=0;
     function typeWriter(){
