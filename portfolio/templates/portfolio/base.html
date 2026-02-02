@@ -58,6 +58,9 @@
       position: relative;
       z-index: 1;
     }
+    main {
+      flex: 1; /* Pushes footer to bottom */
+    }
 
     /* BACKGROUND SLIDESHOW DIV */
     #bg-slideshow {
@@ -109,12 +112,12 @@
     .btn-secondary:hover { background:#5a6268; }
 
     /* FOOTER FIXED AT BOTTOM */
-    footer, .site-footer {
-      text-align:center;
-      padding:2rem 1rem;
-      background:#020617;
-      color:#cbd5f5;
+    footer.site-footer {
       flex-shrink: 0;
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #020617;
+      color: #cbd5f5;
     }
 
     .cursor { animation: blink 1s infinite; }
@@ -145,17 +148,21 @@
   </style>
 </head>
 
-<body id="page-wrapper" class="dark">
-
-  <!-- BACKGROUND SLIDESHOW -->
+<body class="dark">
+  <!-- Background Slideshow -->
   <div id="bg-slideshow"></div>
 
-  {% block content %}{% endblock %}
+  <!-- PAGE WRAPPER -->
+  <div id="page-wrapper">
+    <main style="flex:1;">
+      {% block content %}{% endblock %}
+    </main>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <p>&copy; 2025 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑</p>
-  </footer>
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>&copy; 2025 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑</p>
+    </footer>
+  </div>
 
   <!-- Adsense -->
   <ins class="adsbygoogle" style="display:block;text-align:center"
