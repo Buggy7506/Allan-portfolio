@@ -1,88 +1,239 @@
- {% extends 'portfolio/base.html' %} {% load static %} {% block title %}My Projects - 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑 {% endblock %}
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}My Projects – 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑{% endblock %}
 
 {% block content %}
 
+<style>
+/* ===============================
+   GLOBAL STYLES
+================================ */
+header {
+  text-align: center;
+  padding: 4rem 1rem;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #fff;
+}
+
+header h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+}
+
+.cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+.section-title {
+  text-align: center;
+  margin: 3rem 0 2rem;
+  font-weight: 700;
+  color: #0d6efd;
+}
+
+/* ===============================
+   PROJECT CARDS
+================================ */
+.card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 45px rgba(0,0,0,0.35);
+}
+
+.card-img-top {
+  height: 220px;
+  object-fit: cover;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.card-body h5 {
+  font-weight: 700;
+}
+
+.card-body p {
+  font-size: 0.95rem;
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+.btn {
+  margin: 0.25rem 0.15rem;
+}
+
+.btn-success {
+  background: linear-gradient(to right, #198754, #20c997);
+  border: none;
+}
+
+/* ===============================
+   SECTIONS
+================================ */
+section.container {
+  margin-bottom: 4rem;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  background: #0f172a;
+  color: #ccc;
+}
+</style>
+
+<!-- ===============================
+     HERO
+================================ -->
 <header>
-  <h1>𝕯𝖗.𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑</h1>
-  <p><span id="typed-text"></span><span class="cursor">|</span></p>
-  <button onclick="toggleTheme()" class="btn btn-outline-primary">Toggle Theme</button>
-</header><section class="container">
+  <h1>𝕯𝖗. 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑</h1>
+  <p>
+    <span id="typed-text"></span><span class="cursor">|</span>
+  </p>
+  <button onclick="toggleTheme()" class="btn btn-outline-light">
+    Toggle Theme
+  </button>
+</header>
+
+<!-- ===============================
+     PROJECTS
+================================ -->
+<section class="container">
   <h2 class="section-title">My Projects</h2>
-  <div class="row">
+  <div class="row g-4">
+
     {% for project in projects %}
-      <div class="col-md-4" data-aos="fade-up">
-        <div class="card">
-          {% if project.image %}
-            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="card-img-top">
-          {% endif %}
-          <div class="card-body">
-            <h5>{{ project.title }}</h5>
-            <p>{{ project.description }}</p>
-            <p><strong>{{ project.technology }}</strong></p>{% if project.github_link %}
-          <a href="{{ project.github_link }}" target="_blank" class="btn btn-outline-primary">
-            🔗 View on GitHub
-          </a>
+    <div class="col-md-4" data-aos="fade-up">
+      <div class="card h-100">
+
+        {% if project.image %}
+          <img src="{{ project.image.url }}" alt="{{ project.title }}" class="card-img-top">
         {% endif %}
-        {% if project.demo_link %}
-          <a href="{{ project.demo_link }}" target="_blank" class="btn btn-success">
-            🌐 Live Demo
-          </a>
-        {% endif %}
-        <a href="/media/Allan Fazul.pdf" download class="btn btn-secondary">
-          📄 Download My CV
-        </a>
+
+        <div class="card-body d-flex flex-column">
+          <h5>{{ project.title }}</h5>
+          <p>{{ project.description }}</p>
+          <p><strong>{{ project.technology }}</strong></p>
+
+          <div class="mt-auto">
+            {% if project.github_link %}
+              <a href="{{ project.github_link }}" target="_blank" class="btn btn-outline-primary btn-sm">
+                🔗 GitHub
+              </a>
+            {% endif %}
+
+            {% if project.demo_link %}
+              <a href="{{ project.demo_link }}" target="_blank" class="btn btn-success btn-sm">
+                🌐 Live Demo
+              </a>
+            {% endif %}
+
+            <a href="{% static 'docs/Allan_Fazul_CV.pdf' %}" download class="btn btn-secondary btn-sm">
+              📄 CV
+            </a>
+          </div>
+        </div>
+
       </div>
     </div>
-  </div>
-{% endfor %}
+    {% endfor %}
 
   </div>
-</section><section class="container">
+</section>
+
+<!-- ===============================
+     HIRE ME
+================================ -->
+<section class="container">
   <h2 class="section-title">Hire Me</h2>
-  <ul>
-    <li>Django and Access systems</li>
-    <li>Word Processing, Reports, Presentations</li>
-    <li>Excel data analysis & dashboards</li>
-    <li>Python, Java, HTML, JS, SQL</li>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Django & Access Systems</li>
+    <li class="list-group-item">Reports, Presentations & Documentation</li>
+    <li class="list-group-item">Excel Data Analysis & Dashboards</li>
+    <li class="list-group-item">Python, Java, HTML, JavaScript, SQL</li>
   </ul>
-  <p>📞 0704715655 | 📧 linux7506@gmail.com</p>
-</section><section class="container">
+  <p class="mt-3 text-center">
+    📞 0704715655 | 📧 linux7506@gmail.com
+  </p>
+</section>
+
+<!-- ===============================
+     SUPPORT
+================================ -->
+<section class="container text-center">
   <h2 class="section-title">Support My Work</h2>
   <p><strong>M-PESA:</strong> 0704715655</p>
-  <a href="sms:+254704715655?body=Hi%20Allan%2C%20I%20just%20sent%20a%20support%20token%20via%20M-PESA" class="btn btn-success">💚 I Sent Support</a>
-</section><section class="container">
+  <a href="sms:+254704715655?body=Hi%20Allan%2C%20I%20just%20sent%20support%20via%20M-PESA"
+     class="btn btn-success">
+    💚 I Sent Support
+  </a>
+</section>
+
+<!-- ===============================
+     DEALS
+================================ -->
+<section class="container">
   <h2 class="section-title">Recommended Deals</h2>
-  <div class="row">
+  <div class="row text-center">
+
     <div class="col-md-6">
       <a href="https://jumia.link/your-code" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Jumia_logo.svg/2560px-Jumia_logo.svg.png" alt="Jumia" style="max-height: 60px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Jumia_logo.svg"
+             alt="Jumia" style="max-height:60px;">
         <p>Laptops on Jumia</p>
       </a>
     </div>
+
     <div class="col-md-6">
       <a href="https://www.hostpinnacle.co.ke/clients/aff.php?aff=3171" target="_blank">
-        <img src="{% static 'img/hostpinnacle.png' %}" alt="HostPinnacle" class="img-fluid" style="max-height: 60px;">
+        <img src="{% static 'img/hostpinnacle.png' %}"
+             alt="HostPinnacle" style="max-height:60px;">
         <p>Fast Hosting by HostPinnacle</p>
       </a>
     </div>
+
   </div>
-</section><section class="container">
-  <h2 class="section-title">Connect with Me</h2>
-  <div style="text-align: center;">
-    <a href="https://wa.me/254704715655" target="_blank" style="margin: 0 10px;">
-      <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WhatsApp" width="40">
-    </a>
-    <a href="https://instagram.com/d.f.w._.st3pp3r" target="_blank" style="margin: 0 10px;">
-      <img src="https://img.icons8.com/color/48/000000/instagram-new--v1.png" alt="Instagram" width="40">
-    </a>
-    <a href="https://facebook.com/buggystepper" target="_blank" style="margin: 0 10px;">
-      <img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook" width="40">
-    </a>
-   <a href="https://t.me/𝕾𝖙𝖊𝖕𝖕𝖊𝖗" target="_blank" style="margin: 0 10px;">
-      <img src="https://img.icons8.com/color/48/000000/telegram-app.png" alt="Telegram" width="40">
-    </a>
-  </div>
-</section><footer>
-  <p>&copy; 2025 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑 </p>
+</section>
+
+<!-- ===============================
+     SOCIALS
+================================ -->
+<section class="container text-center">
+  <h2 class="section-title">Connect With Me</h2>
+
+  <a href="https://wa.me/254704715655" target="_blank">
+    <img src="https://img.icons8.com/color/48/whatsapp--v1.png" alt="WhatsApp">
+  </a>
+
+  <a href="https://instagram.com/d.f.w._.st3pp3r" target="_blank">
+    <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="Instagram">
+  </a>
+
+  <a href="https://facebook.com/buggystepper" target="_blank">
+    <img src="https://img.icons8.com/color/48/facebook-new.png" alt="Facebook">
+  </a>
+
+  <a href="https://t.me/Stepper" target="_blank">
+    <img src="https://img.icons8.com/color/48/telegram-app.png" alt="Telegram">
+  </a>
+</section>
+
+<footer>
+  <p>&copy; 2025 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑</p>
 </footer>
+
 {% endblock %}
