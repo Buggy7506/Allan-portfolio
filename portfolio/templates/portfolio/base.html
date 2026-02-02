@@ -1,22 +1,179 @@
- {% load static %}
-
-<!DOCTYPE html><html lang="en">
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <!-- Favicon -->
- <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% block title %} 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑 {% endblock %}</title>  <!-- ✅ Google AdSense Script -->  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-          data-ad-client="ca-pub-3641984586289352"></script>  <!-- ✅ AOS Animations CSS -->  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />  <!-- ✅ Custom Styles -->  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head><body onload="animateSkills(); typeWriter();">
-  {% block content %}{% endblock %}  <!-- ✅ Google Ad Block --><ins class="adsbygoogle"
-style="display:block; text-align:center;"
-data-ad-client="ca-pub-3641984586289352"
-data-ad-slot="3673984646"
-data-ad-format="auto"
-data-full-width-responsive="true"></ins>
+  <!-- ===============================
+       CORE META
+  ================================ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{% block title %}𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑{% endblock %}</title>
+
+  <!-- ===============================
+       FAVICON
+  ================================ -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <!-- ===============================
+       SEO (GLOBAL)
+  ================================ -->
+  <meta name="description" content="Allan Fazul – Django Developer, Python Engineer, Portfolio & Projects">
+  <meta name="keywords" content="Django, Python, Web Developer, Kenya, Portfolio">
+
+  <!-- ===============================
+       OPEN GRAPH
+  ================================ -->
+  <meta property="og:title" content="Allan Fazul | Portfolio">
+  <meta property="og:description" content="Projects, demos, and professional work by Allan Fazul">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://stepper.dpdns.org">
+  {% block og_image %}{% endblock %}
+
+  <!-- ===============================
+       GOOGLE ADSENSE
+  ================================ -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    data-ad-client="ca-pub-3641984586289352">
+  </script>
+
+  <!-- ===============================
+       AOS ANIMATIONS
+  ================================ -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- ===============================
+       GLOBAL STYLES
+  ================================ -->
+  <style>
+    :root {
+      --primary: #0d6efd;
+      --success: #198754;
+      --dark-bg: #0f172a;
+      --dark-card: rgba(255,255,255,0.08);
+      --light-bg: #f8fafc;
+      --light-card: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      transition: background .3s, color .3s;
+    }
+
+    body.dark {
+      background: var(--dark-bg);
+      color: #e5e7eb;
+    }
+
+    body.light {
+      background: var(--light-bg);
+      color: #0f172a;
+    }
+
+    header {
+      background: linear-gradient(135deg, #020617, #1e293b);
+      color: #fff;
+      padding: 4rem 1rem;
+      text-align: center;
+    }
+
+    .section-title {
+      font-weight: 800;
+      margin-bottom: 2rem;
+      color: var(--primary);
+    }
+
+    /* ===============================
+       CARDS (GLASSMORPHISM)
+    ================================ */
+    .card {
+      background: var(--dark-card);
+      backdrop-filter: blur(14px);
+      border-radius: 16px;
+      border: none;
+      box-shadow: 0 20px 45px rgba(0,0,0,.35);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    body.light .card {
+      background: var(--light-card);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px rgba(0,0,0,.45);
+    }
+
+    .card-img-top {
+      height: 220px;
+      object-fit: cover;
+      border-radius: 16px 16px 0 0;
+    }
+
+    /* ===============================
+       BUTTONS
+    ================================ */
+    .btn {
+      margin: .25rem .15rem;
+    }
+
+    .btn-success {
+      background: linear-gradient(to right, #198754, #20c997);
+      border: none;
+    }
+
+    footer {
+      background: #020617;
+      color: #9ca3af;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .cursor {
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%,100% {opacity:1}
+      50% {opacity:0}
+    }
+  </style>
+ 
+</head>
+
+<body onload="animateSkills(); typeWriter();">
+
+  {% block content %}{% endblock %}
+
+  <!-- ===============================
+       GOOGLE AD BLOCK
+  ================================ -->
+  <ins class="adsbygoogle"
+       style="display:block;text-align:center"
+       data-ad-client="ca-pub-3641984586289352"
+       data-ad-slot="3673984646"
+       data-ad-format="auto"
+       data-full-width-responsive="true">
+  </ins>
 
   <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>  <!-- ✅ Custom JS -->  <script src="{% static 'js/script.js' %}"></script>  <!-- ✅ AOS Animations JS -->  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>  <script>AOS.init({ duration: 1000, once: true });</script></body>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!-- ===============================
+       CUSTOM JS (AJAX + THEME)
+  ================================ -->
+  <script src="{% static 'js/script.js' %}"></script>
+
+  <!-- ===============================
+       AOS INIT
+  ================================ -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+  </script>
+
+</body>
 </html>
