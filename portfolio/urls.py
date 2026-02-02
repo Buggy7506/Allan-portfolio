@@ -7,5 +7,5 @@ urlpatterns = [
     # -------------------------
     path("ping/", views.ping, name="ping"),
     path('', views.index, name='index'),
-    path('like/<int:pk>/', views.like_project, name='like_project'),
+    path('project/<int:pk>/like/', views.like_project_ajax, name='like_project_ajax'),
 ]
