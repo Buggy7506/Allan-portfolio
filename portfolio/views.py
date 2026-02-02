@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.http import require_POST
 
 from .models import Project
@@ -38,8 +38,8 @@ def index(request):
 # Like project (POST only)
 # -----------------------------
 @require_POST
-def like_project(request, pk):
+def like_project_ajax(request, pk):
     project = get_object_or_404(Project, pk=pk)
-    project.likes = project.likes + 1
+    project.likes += 1
     project.save(update_fields=['likes'])
-    return redirect('index')
+    return JsonResponse({'likes': project.likes})
