@@ -44,17 +44,34 @@
       margin: 0;
       font-family: 'Segoe UI', system-ui, sans-serif;
       transition: background 0.5s, color 0.5s;
+      position: relative;
     }
 
-    body.dark { background: var(--dark-bg); color: #e5e7eb; }
-    body.light { background: var(--light-bg); color: #0f172a; }
+    body.dark { color: #e5e7eb; }
+    body.light { color: #0f172a; }
 
     /* PAGE WRAPPER */
     #page-wrapper {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      position: relative;
+      z-index: 1;
     }
+
+    /* BACKGROUND SLIDESHOW DIV */
+    #bg-slideshow {
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      z-index:-1;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    #bg-slideshow.show { opacity: 1; }
 
     /* HEADER */
     header {
@@ -130,9 +147,12 @@
 
 <body id="page-wrapper" class="dark">
 
+  <!-- BACKGROUND SLIDESHOW -->
+  <div id="bg-slideshow"></div>
+
   {% block content %}{% endblock %}
 
-  <!-- Footer Added -->
+  <!-- Footer -->
   <footer class="site-footer">
     <p>&copy; 2025 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑</p>
   </footer>
@@ -183,7 +203,7 @@
       });
     });
 
-    /* CLOUDINARY BACKGROUND SLIDESHOW */
+    /* CLOUDINARY BACKGROUND SLIDESHOW WITH FADE */
     const images = [
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293053/upload_cv_ycfvbc.png",
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293058/alert_oibikt.png",
@@ -193,16 +213,19 @@
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1754404722/samples/shoe.jpg"
     ];
     let index = 0;
-    function changeBackground(){
-      document.body.style.backgroundImage = `url('${images[index]}')`;
-      document.body.style.backgroundSize = 'cover';
-      document.body.style.backgroundPosition = 'center';
+    const bgDiv = document.getElementById('bg-slideshow');
+
+    function showNextImage(){
+      bgDiv.style.backgroundImage = `url('${images[index]}')`;
+      bgDiv.classList.add('show');
+      setTimeout(()=>{ bgDiv.classList.remove('show'); }, 9500); // fade out before next
       index = (index + 1) % images.length;
     }
-    // Start slideshow after 3 seconds
-    setTimeout(() => {
-      changeBackground();
-      setInterval(changeBackground, 10000);
+
+    // Start slideshow after 3s
+    setTimeout(()=>{
+      showNextImage();
+      setInterval(showNextImage, 10000);
     }, 3000);
 
     /* SKILL BAR ANIMATION */
