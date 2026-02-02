@@ -1,7 +1,7 @@
 {% extends 'portfolio/base.html' %}
 {% load static %}
 
-{% block title %}My Projects – 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑{% endblock %}
+{% block title %}𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑{% endblock %}
 
 {% block og_image %}
   {% if projects and projects.0.image %}
@@ -109,174 +109,168 @@ body.light {
   background: #f8fafc;
   color: #0f172a;
 }
+/* ===============================
+   PAGE LAYOUT (Sticky Footer)
+================================ */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 1.5rem;
+  background: #0f172a;
+  color: #cbd5f5;
+}
+
+/* ===============================
+   MENU TOGGLE BUTTON
+================================ */
+.menu-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2000;
+  background: linear-gradient(135deg, #0d6efd, #6610f2);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* ===============================
+   SECTION VISIBILITY
+================================ */
+.section {
+  display: none;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 </style>
-  <!-- ===============================
-       STATIC CSS (OPTIONAL)
-  ================================ -->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<!-- ===============================
+     MENU TOGGLE
+================================ -->
+<button id="menuToggle" class="menu-toggle">☰</button>
 
 <!-- ===============================
      HERO
 ================================ -->
 <header class="text-center py-5 bg-dark text-light">
   <h1>𝕯𝖗. 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑</h1>
-  <p>
-    <span id="typed-text"></span><span class="cursor">|</span>
-  </p>
+  <p><span id="typed-text"></span><span class="cursor">|</span></p>
   <button onclick="toggleTheme()" class="btn btn-outline-light">
     Toggle Theme
   </button>
 </header>
 
 <!-- ===============================
-     PROJECTS
+     SECTIONS (Toggle-Ready)
 ================================ -->
-<section class="container my-5">
+<section id="projects" class="section active container my-5">
   <h2 class="section-title text-center">My Projects</h2>
-
   <div class="row g-4">
     {% for project in projects %}
-    <div class="col-md-4" data-aos="fade-up">
-      <div class="card h-100 shadow-lg">
-
-        {% if project.image %}
-          <!-- Cloudinary auto-resize + WebP -->
-          <img
-            src="{{ project.image.url }}?f_auto,q_auto,w_600,h_400,c_fill"
-            alt="{{ project.title }}"
-            class="card-img-top"
-          >
-        {% endif %}
-
-        <div class="card-body d-flex flex-column">
-          <h5 class="fw-bold">{{ project.title }}</h5>
-          <p>{{ project.description }}</p>
-          <p><strong>{{ project.technology }}</strong></p>
-
-          <!-- Analytics -->
-          <small class="text-muted mb-2">
-            👁 {{ project.views }} views
-          </small>
-
-          <div class="mt-auto">
-            {% if project.github_link %}
-              <a href="{{ project.github_link }}" target="_blank"
-                 class="btn btn-outline-primary btn-sm">
-                🔗 GitHub
-              </a>
-            {% endif %}
-
-            {% if project.demo_link %}
-              <a href="{{ project.demo_link }}" target="_blank"
-                 class="btn btn-success btn-sm">
-                🌐 Live Demo
-              </a>
-            {% endif %}
-
-            <!-- AJAX Like Button -->
-            <button
-              class="btn btn-outline-danger btn-sm like-btn"
-              data-id="{{ project.id }}">
-              ❤️ <span id="likes-{{ project.id }}">{{ project.likes }}</span>
-            </button>
-
-            <a href="{% static 'docs/Allan_Fazul_CV.pdf' %}"
-               download
-               class="btn btn-secondary btn-sm">
-              📄 CV
-            </a>
+      <div class="col-md-4" data-aos="fade-up">
+        <div class="card h-100 shadow-lg">
+          {% if project.image %}
+            <img src="{{ project.image.url }}?f_auto,q_auto,w_600,h_400,c_fill" 
+                 alt="{{ project.title }}" class="card-img-top">
+          {% endif %}
+          <div class="card-body d-flex flex-column">
+            <h5 class="fw-bold">{{ project.title }}</h5>
+            <p>{{ project.description }}</p>
+            <p><strong>{{ project.technology }}</strong></p>
+            <small class="text-muted mb-2">👁 {{ project.views }} views</small>
+            <div class="mt-auto">
+              {% if project.github_link %}
+                <a href="{{ project.github_link }}" target="_blank" class="btn btn-outline-primary btn-sm">🔗 GitHub</a>
+              {% endif %}
+              {% if project.demo_link %}
+                <a href="{{ project.demo_link }}" target="_blank" class="btn btn-success btn-sm">🌐 Live Demo</a>
+              {% endif %}
+              <button class="btn btn-outline-danger btn-sm like-btn" data-id="{{ project.id }}">
+                ❤️ <span id="likes-{{ project.id }}">{{ project.likes }}</span>
+              </button>
+              <a href="{% static 'docs/Allan_Fazul_CV.pdf' %}" download class="btn btn-secondary btn-sm">📄 CV</a>
+            </div>
           </div>
         </div>
-
       </div>
-    </div>
     {% endfor %}
   </div>
 </section>
 
-<!-- ===============================
-     HIRE ME
-================================ -->
-<section class="container my-5">
+<section id="hire" class="section container my-5">
   <h2 class="section-title text-center">Hire Me</h2>
-
   <ul class="list-group list-group-flush">
     <li class="list-group-item">Django & Access Systems</li>
     <li class="list-group-item">Reports, Presentations & Documentation</li>
     <li class="list-group-item">Excel Data Analysis & Dashboards</li>
     <li class="list-group-item">Python, Java, HTML, JavaScript, SQL</li>
   </ul>
-
-  <p class="mt-3 text-center">
-    📞 0704715655 | 📧 linux7506@gmail.com
-  </p>
+  <p class="mt-3 text-center">📞 0704715655 | 📧 linux7506@gmail.com</p>
 </section>
 
-<!-- ===============================
-     SUPPORT
-================================ -->
-<section class="container text-center my-5">
+<section id="support" class="section container text-center my-5">
   <h2 class="section-title">Support My Work</h2>
   <p><strong>M-PESA:</strong> 0704715655</p>
-
-  <a href="sms:+254704715655?body=Hi%20Allan%2C%20I%20just%20sent%20support%20via%20M-PESA"
-     class="btn btn-success">
-    💚 I Sent Support
-  </a>
+  <a href="sms:+254704715655?body=Hi%20Allan%2C%20I%20just%20sent%20support%20via%20M-PESA" class="btn btn-success">💚 I Sent Support</a>
 </section>
 
-<!-- ===============================
-     DEALS
-================================ -->
-<section class="container my-5">
+<section id="deals" class="section container my-5">
   <h2 class="section-title text-center">Recommended Deals</h2>
-
   <div class="row text-center">
     <div class="col-md-6">
       <a href="https://jumia.link/your-code" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Jumia_logo.svg"
-             alt="Jumia" style="max-height:60px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Jumia_logo.svg" alt="Jumia" style="max-height:60px;">
         <p>Laptops on Jumia</p>
       </a>
     </div>
-
     <div class="col-md-6">
       <a href="https://www.hostpinnacle.co.ke/clients/aff.php?aff=3171" target="_blank">
-        <img src="{% static 'img/hostpinnacle.png' %}"
-             alt="HostPinnacle" style="max-height:60px;">
+        <img src="{% static 'img/hostpinnacle.png' %}" alt="HostPinnacle" style="max-height:60px;">
         <p>Fast Hosting by HostPinnacle</p>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ===============================
-     SOCIALS
-================================ -->
-<section class="container text-center my-5">
+<section id="socials" class="section container text-center my-5">
   <h2 class="section-title">Connect With Me</h2>
-
-  <a href="https://wa.me/254704715655" target="_blank">
-    <img src="https://img.icons8.com/color/48/whatsapp--v1.png">
-  </a>
-
-  <a href="https://instagram.com/d.f.w._.st3pp3r" target="_blank">
-    <img src="https://img.icons8.com/color/48/instagram-new--v1.png">
-  </a>
-
-  <a href="https://facebook.com/buggystepper" target="_blank">
-    <img src="https://img.icons8.com/color/48/facebook-new.png">
-  </a>
-
-  <a href="https://t.me/Stepper" target="_blank">
-    <img src="https://img.icons8.com/color/48/telegram-app.png">
-  </a>
+  <a href="https://wa.me/254704715655" target="_blank"><img src="https://img.icons8.com/color/48/whatsapp--v1.png"></a>
+  <a href="https://instagram.com/d.f.w._.st3pp3r" target="_blank"><img src="https://img.icons8.com/color/48/instagram-new--v1.png"></a>
+  <a href="https://facebook.com/buggystepper" target="_blank"><img src="https://img.icons8.com/color/48/facebook-new.png"></a>
+  <a href="https://t.me/Stepper" target="_blank"><img src="https://img.icons8.com/color/48/telegram-app.png"></a>
 </section>
 
-<footer class="text-center py-4 bg-dark text-light">
+<footer class="site-footer text-center py-4 bg-dark text-light">
   <p>&copy; 2025 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑</p>
 </footer>
 
+<!-- ===============================
+     SCRIPT: THEME + AJAX + MENU TOGGLE
+================================ -->
 <script>
 (function () {
   /* ============================
@@ -303,22 +297,36 @@ body.light {
     document.querySelectorAll('.like-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
         const id = this.dataset.id;
-
         fetch(`/project/${id}/like/`, {
           method: 'POST',
-          headers: {
-            'X-CSRFToken': '{{ csrf_token }}',
-          }
+          headers: { 'X-CSRFToken': '{{ csrf_token }}' }
         })
         .then(response => response.json())
         .then(data => {
           const counter = document.getElementById(`likes-${id}`);
-          if (counter) {
-            counter.innerText = data.likes;
-          }
+          if (counter) counter.innerText = data.likes;
         });
       });
     });
+
+    /* ============================
+       MENU TOGGLE: Cycle Sections
+    ============================ */
+    const sections = ["projects","hire","support","deals","socials"];
+    let index = 0;
+
+    const showSection = id => {
+      sections.forEach(s => document.getElementById(s).classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    };
+
+    const menuBtn = document.getElementById("menuToggle");
+    if (menuBtn) {
+      menuBtn.addEventListener("click", function () {
+        index = (index + 1) % sections.length;
+        showSection(sections[index]);
+      });
+    }
   });
 })();
 </script>
