@@ -111,13 +111,40 @@
     .btn-secondary { background:#6c757d; color:white; border:none; }
     .btn-secondary:hover { background:#5a6268; }
 
-    /* FOOTER FIXED AT BOTTOM */
+    /* FOOTER FIX */
     footer.site-footer {
-      flex-shrink: 0;
+      flex-shrink: 0;           /* Prevent shrinking */
       text-align: center;
       padding: 2rem 1rem;
       background: #020617;
       color: #cbd5f5;
+    }
+    
+    footer.site-footer .footer-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    #socials {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    
+    #socials a img {
+      width: 40px;
+      height: 40px;
+      transition: transform 0.3s, filter 0.3s;
+    }
+    
+    #socials a:hover img {
+      transform: scale(1.2);
+      filter: drop-shadow(0 0 6px var(--primary));
+    }
+    
+    @media(max-width:576px){
+      #socials { flex-direction: row; justify-content: center; gap: 1rem; }
     }
 
     .cursor { animation: blink 1s infinite; }
@@ -154,13 +181,20 @@
 
   <!-- PAGE WRAPPER -->
   <div id="page-wrapper">
-    <main style="flex:1;">
+    <main>
       {% block content %}{% endblock %}
     </main>
 
     <!-- Footer -->
     <footer class="site-footer">
-      <p>&copy; 2025 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑</p>
+      <div class="footer-content">
+        <p>&copy; 2025 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑</p>
+        <div id="socials">
+          <a href="https://github.com/Buggy7506"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub"></a>
+          <a href="#"><img src="https://logo.svgcdn.com/logos/linkedin.png" alt="LinkedIn"></a>
+          <a href="#"><img src="https://logo.svgcdn.com/logos/x.png" alt="Twitter"></a>
+        </div>
+      </div>
     </footer>
   </div>
 
