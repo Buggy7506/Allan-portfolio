@@ -19,6 +19,12 @@
 <meta property="og:url" content="https://stepper.dpdns.org">
 {% block og_image %}{% endblock %}
 
+<!-- Prevent theme flash -->
+<script>
+  document.documentElement.className =
+    localStorage.getItem('theme') || 'dark';
+</script>
+
 <!-- Google Adsense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
         data-ad-client="ca-pub-3641984586289352"></script>
@@ -189,7 +195,7 @@ footer.site-footer {
 
 <div id="bg-slideshow"></div>
 
-<button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌓</button>
 
 <div id="page-wrapper">
 <main>
@@ -199,9 +205,15 @@ footer.site-footer {
 <footer class="site-footer">
 <p>&copy; 2025 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑</p>
 <div id="socials">
-<a href="https://github.com/Buggy7506"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></a>
-<a href="#"><img src="https://logo.svgcdn.com/logos/linkedin.png"></a>
-<a href="#"><img src="https://logo.svgcdn.com/logos/x.png"></a>
+  <a href="https://github.com/Buggy7506" target="_blank" rel="noopener noreferrer">
+    <img loading="lazy" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
+  </a>
+  <a href="#" target="_blank" rel="noopener noreferrer">
+    <img loading="lazy" src="https://logo.svgcdn.com/logos/linkedin.png" alt="LinkedIn">
+  </a>
+  <a href="#" target="_blank" rel="noopener noreferrer">
+    <img loading="lazy" src="https://logo.svgcdn.com/logos/x.png" alt="Twitter">
+  </a>
 </div>
 </footer>
 </div>
@@ -211,34 +223,102 @@ footer.site-footer {
 <script>AOS.init({ once:true });</script>
 
 <script>
-/* ================= THEME ================= */
-(function(){
-  document.body.className = localStorage.getItem('theme') || 'dark';
-})();
-function toggleTheme(){
-  const body=document.body;
-  const theme=body.classList.contains('dark')?'light':'dark';
-  body.className=theme;
-  localStorage.setItem('theme',theme);
-}
+(function () {
 
-/* ================= BACKGROUND SLIDESHOW ================= */
-const images=[
+  /* ================= THEME ================= */
+  function applySavedTheme() {
+    document.body.className = localStorage.getItem('theme') || 'dark';
+  }
+
+  window.toggleTheme = function () {
+    const theme = document.body.classList.contains('dark') ? 'light' : 'dark';
+    document.body.className = theme;
+    localStorage.setItem('theme', theme);
+  };
+
+  applySavedTheme();
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    /* ================= CSRF ================= */
+    function getCSRFToken() {
+      const cookies = document.cookie.split(';');
+      for (let c of cookies) {
+        c = c.trim();
+        if (c.startsWith('csrftoken=')) {
+          return decodeURIComponent(c.substring(10));
+        }
+      }
+      return '';
+    }
+
+    /* ================= LIKE BUTTON ================= */
+    document.querySelectorAll('.like-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        fetch(`/project/${id}/like/`, {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': getCSRFToken(),
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        })
+        .then(r => r.json())
+        .then(data => {
+          const counter = document.getElementById(`likes-${id}`);
+          if (counter) counter.textContent = data.likes;
+        })
+        .catch(console.error);
+      });
+    });
+
+    /* ================= BACKGROUND SLIDESHOW ================= */
+    const images = [
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293053/upload_cv_ycfvbc.png",
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293058/alert_oibikt.png",
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293036/resume_wdunf1.png",
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293044/suggest_ojjngh.png",
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293032/Black_Wallpaper_010_h4iy3f.png",
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1754404722/samples/shoe.jpg"
-];
-let i=0;
-const bg=document.getElementById("bg-slideshow");
+    ];
 
-setInterval(()=>{
-  bg.style.backgroundImage=`url(${images[i]})`;
-  bg.classList.add("show");
-  i=(i+1)%images.length;
-},9000);
+    let index = 0;
+    const bg = document.getElementById('bg-slideshow');
+
+    function rotateBg() {
+      if (!bg) return;
+      bg.style.backgroundImage = `url("${images[index]}")`;
+      bg.classList.add('show');
+      index = (index + 1) % images.length;
+    }
+
+    setTimeout(() => {
+      rotateBg();
+      setInterval(rotateBg, 10000);
+    }, 3000);
+
+    /* ================= SKILLS ================= */
+    document.querySelectorAll('.skill-fill').forEach(bar => {
+      bar.style.width = '0';
+      setTimeout(() => bar.style.width = bar.dataset.width || '100%', 150);
+    });
+
+    /* ================= TYPING ================= */
+    const text = "I specialize in: Python, Java, Excel, Word, JavaScript, HTML, Access...";
+    const el = document.getElementById("typed-text");
+    let i = 0;
+
+    function typeWriter() {
+      if (!el || i >= text.length) return;
+      el.textContent += text.charAt(i++);
+      setTimeout(typeWriter, 60);
+    }
+
+    typeWriter();
+
+  });
+
+})();
 </script>
 
 </body>
