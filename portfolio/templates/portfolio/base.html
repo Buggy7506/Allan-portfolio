@@ -2,291 +2,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>{% block title %}𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑{% endblock %}</title>
+<title>{% block title %}𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑{% endblock %}</title>
+<link rel="icon" href="{% static 'favicon.ico' %}">
 
-  <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+<!-- SEO -->
+<meta name="description" content="Allan Fazul – Django Developer, Python Engineer, Portfolio & Projects">
+<meta name="keywords" content="Django, Python, Web Developer, Kenya, Portfolio">
 
-  <!-- SEO -->
-  <meta name="description" content="Allan Fazul – Django Developer, Python Engineer, Portfolio & Projects">
-  <meta name="keywords" content="Django, Python, Web Developer, Kenya, Portfolio">
+<!-- OpenGraph -->
+<meta property="og:title" content="Allan Fazul | Portfolio">
+<meta property="og:description" content="Projects, demos, and professional work by Allan Fazul">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://stepper.dpdns.org">
+{% block og_image %}{% endblock %}
 
-  <!-- OpenGraph -->
-  <meta property="og:title" content="Allan Fazul | Portfolio">
-  <meta property="og:description" content="Projects, demos, and professional work by Allan Fazul">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://stepper.dpdns.org">
-  {% block og_image %}{% endblock %}
+<!-- Google Adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        data-ad-client="ca-pub-3641984586289352"></script>
 
-  <!-- Google Adsense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" 
-          data-ad-client="ca-pub-3641984586289352"></script>
+<!-- AOS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-  <!-- AOS CSS -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-  <!-- Global Styles -->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <style>
-    :root {
-      --primary: #0d6efd;
-      --success: #198754;
-      --dark-bg: #0f172a;
-      --light-bg: #f8fafc;
-      --dark-card: rgba(255,255,255,0.08);
-      --light-card: rgba(255,255,255,0.95);
-    }
+<style>
+/* ================= VARIABLES ================= */
+:root {
+  --primary:#0d6efd;
+  --success:#20c997;
 
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      transition: background 0.5s, color 0.5s;
-      position: relative;
-    }
+  --bg-dark:#020617;
+  --bg-light:#f8fafc;
 
-    body.dark { color: #e5e7eb; }
-    body.light { color: #0f172a; }
+  --card-dark:rgba(255,255,255,0.08);
+  --card-light:rgba(255,255,255,0.95);
 
-    /* PAGE WRAPPER */
-    #page-wrapper {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      z-index: 1;
-    }
-    main {
-      flex: 1; /* Pushes footer to bottom */
-    }
+  --text-dark:#e5e7eb;
+  --text-light:#020617;
+}
 
-    /* BACKGROUND SLIDESHOW DIV */
-    #bg-slideshow {
-      position: fixed;
-      top:0; left:0;
-      width:100%; height:100%;
-      z-index:-1;
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
-    }
+/* ================= GLOBAL ================= */
+* { box-sizing:border-box; }
 
-    #bg-slideshow.show { opacity: 1; }
+html,body {
+  margin:0;
+  height:100%;
+  font-family:'Segoe UI',system-ui,sans-serif;
+  transition:background .4s,color .4s;
+}
 
-    /* HEADER */
-    header {
-      text-align: center;
-      padding: 4rem 1rem;
-      background: linear-gradient(135deg, #020617, #1e293b);
-      color: white;
-    }
+body.dark {
+  background:var(--bg-dark);
+  color:var(--text-dark);
+}
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
+body.light {
+  background:var(--bg-light);
+  color:var(--text-light);
+}
 
-    .card {
-      background: var(--dark-card);
-      backdrop-filter: blur(14px);
-      border-radius: 16px;
-      border: none;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.35);
-      transition: transform .3s, box-shadow .3s;
-    }
+/* ================= LAYOUT ================= */
+#page-wrapper {
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  z-index:1;
+}
 
-    body.light .card { background: var(--light-card); }
-    .card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,.45); }
+main { flex:1; }
 
-    .card-img-top { height: 220px; object-fit: cover; border-radius: 16px 16px 0 0; width: 100%; }
+/* ================= BACKGROUND SLIDESHOW ================= */
+#bg-slideshow {
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  transition:opacity 1.5s ease-in-out;
+}
+#bg-slideshow.show { opacity:.35; }
 
-    .btn { margin: .25rem .15rem; cursor: pointer; }
-    .btn-success { background: linear-gradient(to right,#198754,#20c997); color:white; border:none; }
-    .btn-success:hover { background:#157347; }
-    .btn-secondary { background:#6c757d; color:white; border:none; }
-    .btn-secondary:hover { background:#5a6268; }
+/* ================= HEADER ================= */
+header {
+  text-align:center;
+  padding:4rem 1rem;
+  background:linear-gradient(135deg,#020617,#1e293b);
+  color:#fff;
+}
 
-    /* FOOTER FIX */
-    footer.site-footer {
-      flex-shrink: 0;           /* Prevent shrinking */
-      text-align: center;
-      padding: 2rem 1rem;
-      background: #020617;
-      color: #cbd5f5;
-    }
-    
-    footer.site-footer .footer-content {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    
-    #socials {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-    
-    #socials a img {
-      width: 40px;
-      height: 40px;
-      transition: transform 0.3s, filter 0.3s;
-    }
-    
-    #socials a:hover img {
-      transform: scale(1.2);
-      filter: drop-shadow(0 0 6px var(--primary));
-    }
-    
-    @media(max-width:576px){
-      #socials { flex-direction: row; justify-content: center; gap: 1rem; }
-    }
+/* ================= CARDS ================= */
+.card {
+  background:var(--card-dark);
+  backdrop-filter:blur(14px);
+  border-radius:16px;
+  border:none;
+  box-shadow:0 20px 45px rgba(0,0,0,.35);
+  transition:.3s;
+}
+body.light .card { background:var(--card-light); }
 
-    .cursor { animation: blink 1s infinite; }
-    @keyframes blink { 0%,100% {opacity:1} 50% {opacity:0} }
+.card:hover {
+  transform:translateY(-8px);
+  box-shadow:0 30px 60px rgba(0,0,0,.45);
+}
 
-    /* SOCIAL ICONS DISTRIBUTION */
-    #socials { display: flex; justify-content: space-between; max-width:500px; margin:2rem auto; padding:0 1rem; }
-    #socials a img { width:48px;height:48px; transition: transform 0.3s, filter 0.3s; }
-    #socials a:hover img { transform: scale(1.2); filter: drop-shadow(0 0 6px var(--primary)); }
-    @media(max-width:576px){ #socials{flex-direction:column; gap:1rem;} }
+.card-img-top {
+  height:220px;
+  object-fit:cover;
+  width:100%;
+  border-radius:16px 16px 0 0;
+}
 
-    /* SECTIONS */
-    section.container { margin-bottom:4rem; }
+/* ================= BUTTONS ================= */
+.btn {
+  margin:.25rem;
+  cursor:pointer;
+  border:none;
+  border-radius:30px;
+  padding:.6rem 1.2rem;
+}
 
-    /* MENU TOGGLE */
-    .menu-toggle {
-      position: fixed; top:20px; right:20px; z-index:2000;
-      background: linear-gradient(135deg,var(--primary),#6610f2);
-      color:#fff; border:none; border-radius:50%;
-      width:55px; height:55px; font-size:1.6rem; cursor:pointer;
-      box-shadow:0 10px 25px rgba(0,0,0,0.3);
-    }
+.btn-success {
+  background:linear-gradient(135deg,#198754,var(--success));
+  color:#fff;
+}
 
-    /* SECTION VISIBILITY */
-    .section { display:none; animation: fadeIn 0.4s ease-in-out; }
-    .section.active { display:block; }
-    @keyframes fadeIn { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
-  </style>
+.btn-secondary {
+  background:#6c757d;
+  color:#fff;
+}
+
+/* ================= FOOTER ================= */
+footer.site-footer {
+  background:#020617;
+  padding:2rem 1rem;
+  text-align:center;
+  color:#cbd5f5;
+}
+
+#socials {
+  display:flex;
+  justify-content:center;
+  gap:1.2rem;
+  margin-top:1rem;
+}
+
+#socials img {
+  width:40px;
+  transition:.3s;
+}
+
+#socials img:hover {
+  transform:scale(1.2);
+  filter:drop-shadow(0 0 6px var(--primary));
+}
+
+/* ================= THEME TOGGLE ================= */
+.theme-toggle {
+  position:fixed;
+  top:20px;
+  right:20px;
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  border:none;
+  background:linear-gradient(135deg,var(--primary),#6610f2);
+  color:#fff;
+  font-size:1.5rem;
+  cursor:pointer;
+  z-index:2000;
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+  header { padding:2.5rem 1rem; }
+  .card { margin-bottom:1.5rem; }
+  #socials { gap:1rem; }
+}
+</style>
 </head>
 
 <body class="dark">
-  <!-- Background Slideshow -->
-  <div id="bg-slideshow"></div>
 
-  <!-- PAGE WRAPPER -->
-  <div id="page-wrapper">
-    <main>
-      {% block content %}{% endblock %}
-    </main>
+<div id="bg-slideshow"></div>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-      <div class="footer-content">
-        <p>&copy; 2025 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑</p>
-        <div id="socials">
-          <a href="https://github.com/Buggy7506"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub"></a>
-          <a href="#"><img src="https://logo.svgcdn.com/logos/linkedin.png" alt="LinkedIn"></a>
-          <a href="#"><img src="https://logo.svgcdn.com/logos/x.png" alt="Twitter"></a>
-        </div>
-      </div>
-    </footer>
-  </div>
+<button class="theme-toggle" onclick="toggleTheme()">🌓</button>
 
-  <!-- Adsense -->
-  <ins class="adsbygoogle" style="display:block;text-align:center"
-       data-ad-client="ca-pub-3641984586289352"
-       data-ad-slot="3673984646"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+<div id="page-wrapper">
+<main>
+{% block content %}{% endblock %}
+</main>
 
-  <!-- AOS -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>AOS.init({ duration:1000, once:true });</script>
+<footer class="site-footer">
+<p>&copy; 2025 𝕬𝖑𝖑𝖆𝖓 𝕱𝖆𝖟𝖚𝖑</p>
+<div id="socials">
+<a href="https://github.com/Buggy7506"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></a>
+<a href="#"><img src="https://logo.svgcdn.com/logos/linkedin.png"></a>
+<a href="#"><img src="https://logo.svgcdn.com/logos/x.png"></a>
+</div>
+</footer>
+</div>
 
-  <!-- CUSTOM JS -->
-  <script>
-  (function(){
-    /* THEME TOGGLE */
-    function applySavedTheme(){
-      const saved = localStorage.getItem('theme') || 'dark';
-      document.body.className = saved;
-    }
-    window.toggleTheme = function(){
-      const body = document.body;
-      const theme = body.classList.contains('dark') ? 'light' : 'dark';
-      body.className = theme;
-      localStorage.setItem('theme', theme);
-    };
-    applySavedTheme();
+<!-- AOS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init({ once:true });</script>
 
-    /* AJAX LIKE BUTTONS */
-    document.addEventListener('DOMContentLoaded', function(){
-      document.querySelectorAll('.like-btn').forEach(function(btn){
-        btn.addEventListener('click', function(){
-          const id = this.dataset.id;
-          fetch(`/project/${id}/like/`, {
-            method:'POST',
-            headers:{ 'X-CSRFToken':'{{ csrf_token }}' }
-          })
-          .then(r=>r.json())
-          .then(data=>{
-            const counter = document.getElementById(`likes-${id}`);
-            if(counter) counter.innerText = data.likes;
-          });
-        });
-      });
-    });
+<script>
+/* ================= THEME ================= */
+(function(){
+  document.body.className = localStorage.getItem('theme') || 'dark';
+})();
+function toggleTheme(){
+  const body=document.body;
+  const theme=body.classList.contains('dark')?'light':'dark';
+  body.className=theme;
+  localStorage.setItem('theme',theme);
+}
 
-    /* CLOUDINARY BACKGROUND SLIDESHOW WITH FADE */
-    const images = [
+/* ================= BACKGROUND SLIDESHOW ================= */
+const images=[
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293053/upload_cv_ycfvbc.png",
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293058/alert_oibikt.png",
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293036/resume_wdunf1.png",
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293044/suggest_ojjngh.png",
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1765293032/Black_Wallpaper_010_h4iy3f.png",
       "https://res.cloudinary.com/dc6z1giw2/image/upload/v1754404722/samples/shoe.jpg"
-    ];
-    let index = 0;
-    const bgDiv = document.getElementById('bg-slideshow');
+];
+let i=0;
+const bg=document.getElementById("bg-slideshow");
 
-    function showNextImage(){
-      bgDiv.style.backgroundImage = `url('${images[index]}')`;
-      bgDiv.classList.add('show');
-      setTimeout(()=>{ bgDiv.classList.remove('show'); }, 9500); // fade out before next
-      index = (index + 1) % images.length;
-    }
+setInterval(()=>{
+  bg.style.backgroundImage=`url(${images[i]})`;
+  bg.classList.add("show");
+  i=(i+1)%images.length;
+},9000);
+</script>
 
-    // Start slideshow after 3s
-    setTimeout(()=>{
-      showNextImage();
-      setInterval(showNextImage, 10000);
-    }, 3000);
-
-    /* SKILL BAR ANIMATION */
-    const bars = document.querySelectorAll('.skill-fill');
-    bars.forEach(bar=>{
-      const w = bar.getAttribute('data-width')||'100%';
-      bar.style.width='0';
-      setTimeout(()=>{bar.style.width=w;},100);
-    });
-
-    /* TYPING EFFECT */
-    const text="I specialize in: Python, Java, Excel, Word, JavaScript, HTML, Access...";
-    let i=0;
-    function typeWriter(){
-      const el=document.getElementById("typed-text");
-      if(!el) return;
-      if(i<text.length){el.innerHTML+=text.charAt(i); i++; setTimeout(typeWriter,60);}
-    }
-    typeWriter();
-  })();
-  </script>
 </body>
 </html>
